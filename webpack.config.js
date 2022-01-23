@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
@@ -29,6 +30,13 @@ module.exports = {
 				test: /\.css|.scss$/i,
 				use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
 			},
+			{
+				test: /\.(png|jpg|jpeg)$/i,
+				type: 'asset/resource',
+				generator: {
+					filename: 'static/images/[hash][ext][query]',
+				},
+			},
 		],
 	},
 	// Here we put plugins that can allow us have more features
@@ -41,5 +49,13 @@ module.exports = {
 		}),
 		// Compiles all the css files in our project into a single one file
 		new MiniCssExtractPlugin(),
+		new CopyPlugin({
+			patterns: [
+				{
+					from: path.resolve(__dirname, 'src/assets/images'),
+					to: 'assets/images',
+				},
+			],
+		}),
 	],
 };
