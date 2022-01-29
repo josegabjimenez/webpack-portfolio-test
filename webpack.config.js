@@ -37,6 +37,13 @@ module.exports = {
 					filename: 'static/images/[hash][ext][query]',
 				},
 			},
+			{
+				test: /\.(woff|woff2)$/,
+				type: 'asset/resource',
+				generator: {
+					filename: 'static/fonts/[name][ext]',
+				},
+			},
 		],
 	},
 	// Here we put plugins that can allow us have more features
