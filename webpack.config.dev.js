@@ -14,7 +14,7 @@ module.exports = {
 		filename: '[name].[contenthash].js',
 	},
 	mode: 'development',
-	watch: true,
+	// watch: true,
 	// The extensions we are using
 	resolve: {
 		extensions: ['.js', '.jsx'],
@@ -77,4 +77,15 @@ module.exports = {
 		}),
 		new Dotenv(),
 	],
+	devServer: {
+		static: {
+			directory: path.join(__dirname, 'dist'),
+			watch: true,
+		},
+		watchFiles: path.join(__dirname, './**'), //watch for files changed and refresh the browser.
+		compress: true,
+		historyApiFallback: true,
+		port: 3000,
+		open: true,
+	},
 };
